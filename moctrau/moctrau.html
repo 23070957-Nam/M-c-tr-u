@@ -629,6 +629,285 @@
   }
   .cart-notif.show { transform: translateY(0); opacity: 1; }
   .cart-notif-icon { font-size: 18px; }
+
+  /* ── CART BUTTON IN NAV ── */
+  .nav-cart-btn {
+    position: relative; background: none; border: none; cursor: pointer;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    color: var(--green-deep); font-size: 20px; transition: color 0.3s;
+  }
+  .nav-cart-btn:hover { color: var(--gold); }
+  .cart-badge {
+    position: absolute; top: 2px; right: 2px;
+    width: 18px; height: 18px; background: var(--gold);
+    border-radius: 50%; font-size: 10px; color: white; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0); transition: all 0.3s;
+  }
+  .cart-badge.visible { opacity: 1; transform: scale(1); }
+
+  /* ── OVERLAY ── */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+  }
+  .overlay.active { opacity: 1; pointer-events: all; }
+
+  /* ── PRODUCT MODAL ── */
+  .product-modal {
+    position: fixed; inset: 0; z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; pointer-events: none; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .product-modal.active { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: var(--white); border-radius: 12px;
+    max-width: 860px; width: 100%; max-height: 90vh; overflow-y: auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    transform: translateY(40px); transition: transform 0.3s;
+    box-shadow: 0 40px 80px rgba(26,58,42,0.25);
+  }
+  .product-modal.active .modal-box { transform: translateY(0); }
+  .modal-img {
+    border-radius: 12px 0 0 12px; overflow: hidden;
+    background: linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    min-height: 400px; position: relative;
+  }
+  .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-body { padding: 40px 36px; display: flex; flex-direction: column; gap: 16px; }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; z-index: 10;
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,0.9); cursor: pointer;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    color: var(--green-deep); transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .modal-close:hover { background: var(--green-deep); color: white; }
+  .modal-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500;
+  }
+  .modal-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; color: var(--green-deep); line-height: 1.2;
+  }
+  .modal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--gold);
+  }
+  .modal-price span { font-family: 'Jost',sans-serif; font-size: 13px; color: var(--text-mid); }
+  .modal-desc { font-size: 13px; color: var(--text-mid); line-height: 1.8; }
+  .modal-details { display: flex; flex-direction: column; gap: 8px; }
+  .modal-detail-row {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--text-mid);
+  }
+  .modal-detail-row strong { color: var(--green-deep); min-width: 80px; }
+  .modal-benefits { display: flex; gap: 8px; flex-wrap: wrap; }
+  .modal-qty {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .qty-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--cream-dark); background: var(--cream);
+    cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    color: var(--green-deep); transition: all 0.2s;
+  }
+  .qty-btn:hover { background: var(--green-deep); color: white; border-color: var(--green-deep); }
+  .qty-num { font-size: 16px; font-weight: 500; color: var(--green-deep); min-width: 24px; text-align: center; }
+  .modal-add-btn {
+    width: 100%; padding: 14px;
+    background: var(--green-deep); color: white; border: none;
+    border-radius: 4px; cursor: pointer;
+    font-family: 'Jost', sans-serif; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    transition: background 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .modal-add-btn:hover { background: var(--gold); }
+  .modal-divider { height: 1px; background: var(--cream-dark); }
+
+  /* ── CART SIDEBAR ── */
+  .cart-sidebar {
+    position: fixed; top: 0; right: -420px; width: 420px; height: 100vh;
+    background: var(--white); z-index: 300;
+    display: flex; flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -20px 0 60px rgba(26,58,42,0.15);
+  }
+  .cart-sidebar.open { right: 0; }
+  .cart-header {
+    padding: 24px 28px; border-bottom: 1px solid var(--cream-dark);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--green-deep);
+  }
+  .cart-close-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 20px; color: var(--text-mid);
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; transition: background 0.2s;
+  }
+  .cart-close-btn:hover { background: var(--cream); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 20px 28px; display: flex; flex-direction: column; gap: 16px; }
+  .cart-empty {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: var(--text-mid); font-size: 14px; text-align: center;
+  }
+  .cart-empty-icon { font-size: 48px; opacity: 0.4; }
+  .cart-item {
+    display: flex; gap: 14px; align-items: center;
+    padding: 14px; border-radius: 8px;
+    border: 1px solid var(--cream-dark); background: var(--cream);
+  }
+  .cart-item-img {
+    width: 64px; height: 64px; border-radius: 6px;
+    overflow: hidden; flex-shrink: 0; background: #e8f5e9;
+  }
+  .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 13px; font-weight: 500; color: var(--green-deep); margin-bottom: 4px; }
+  .cart-item-price { font-size: 13px; color: var(--gold); }
+  .cart-item-qty {
+    display: flex; align-items: center; gap: 8px; margin-top: 8px;
+  }
+  .cart-item-qty button {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 1px solid var(--cream-dark); background: white;
+    cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+    color: var(--green-deep); transition: all 0.2s; line-height: 1;
+  }
+  .cart-item-qty button:hover { background: var(--green-deep); color: white; }
+  .cart-item-qty span { font-size: 13px; min-width: 20px; text-align: center; }
+  .cart-item-remove {
+    background: none; border: none; cursor: pointer;
+    color: #ccc; font-size: 18px; transition: color 0.2s;
+    padding: 4px; align-self: flex-start;
+  }
+  .cart-item-remove:hover { color: #e74c3c; }
+  .cart-footer {
+    padding: 20px 28px; border-top: 1px solid var(--cream-dark);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .cart-total {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-total-label { font-size: 13px; color: var(--text-mid); }
+  .cart-total-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; color: var(--green-deep);
+  }
+  .cart-checkout-btn {
+    width: 100%; padding: 15px;
+    background: var(--green-deep); color: white; border: none;
+    border-radius: 4px; cursor: pointer;
+    font-family: 'Jost', sans-serif; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    transition: background 0.3s;
+  }
+  .cart-checkout-btn:hover { background: var(--gold); }
+  .cart-continue-btn {
+    width: 100%; padding: 12px;
+    background: transparent; color: var(--text-mid); border: 1px solid var(--cream-dark);
+    border-radius: 4px; cursor: pointer;
+    font-family: 'Jost', sans-serif; font-size: 11px;
+    letter-spacing: 1px; transition: all 0.3s;
+  }
+  .cart-continue-btn:hover { border-color: var(--green-deep); color: var(--green-deep); }
+
+  /* ── CHECKOUT MODAL ── */
+  .checkout-modal {
+    position: fixed; inset: 0; z-index: 400;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; pointer-events: none; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .checkout-modal.active { opacity: 1; pointer-events: all; }
+  .checkout-box {
+    background: var(--white); border-radius: 12px;
+    max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;
+    padding: 48px 44px;
+    transform: translateY(40px); transition: transform 0.3s;
+    box-shadow: 0 40px 80px rgba(26,58,42,0.25);
+    position: relative;
+  }
+  .checkout-modal.active .checkout-box { transform: translateY(0); }
+  .checkout-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300; color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+  .checkout-box .section-label { margin-bottom: 24px; }
+  .checkout-summary {
+    background: var(--cream); border-radius: 8px;
+    padding: 16px 20px; margin-bottom: 24px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .checkout-summary-item {
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: var(--text-mid);
+  }
+  .checkout-summary-item.total {
+    border-top: 1px solid var(--cream-dark); padding-top: 8px; margin-top: 4px;
+    font-weight: 500; color: var(--green-deep);
+    font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  }
+  .checkout-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 11px; letter-spacing: 1px; color: var(--green-deep); text-transform: uppercase; font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 12px 14px; border: 1px solid var(--cream-dark);
+    border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 13px;
+    color: var(--text-dark); background: var(--white);
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--green-soft);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .payment-methods { display: flex; flex-direction: column; gap: 10px; }
+  .payment-opt {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px; border: 1px solid var(--cream-dark);
+    border-radius: 6px; cursor: pointer; transition: all 0.2s;
+  }
+  .payment-opt:hover, .payment-opt.selected { border-color: var(--green-soft); background: var(--cream); }
+  .payment-opt input { accent-color: var(--green-deep); }
+  .payment-opt-label { font-size: 13px; color: var(--text-dark); }
+  .payment-opt-sub { font-size: 11px; color: var(--text-mid); }
+  .checkout-submit-btn {
+    width: 100%; padding: 16px;
+    background: var(--green-deep); color: white; border: none;
+    border-radius: 4px; cursor: pointer;
+    font-family: 'Jost', sans-serif; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    transition: background 0.3s; margin-top: 8px;
+  }
+  .checkout-submit-btn:hover { background: var(--gold); }
+  .checkout-success {
+    text-align: center; padding: 40px 20px;
+    display: none; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .checkout-success.show { display: flex; }
+  .checkout-success-icon { font-size: 64px; }
+  .checkout-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--green-deep);
+  }
+  .checkout-success p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+  .checkout-close-btn {
+    background: none; border: none; cursor: pointer;
+    position: absolute; top: 16px; right: 16px;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--text-mid); transition: background 0.2s;
+  }
+  .checkout-close-btn:hover { background: var(--cream); }
 </style>
 </head>
 <body>
@@ -649,12 +928,18 @@
       <span class="logo-sub">Nature · Skincare</span>
     </div>
   </a>
-  <ul class="nav-links">
-    <li><a href="#products">Sản phẩm</a></li>
-    <li><a href="#ingredients">Thành phần</a></li>
-    <li><a href="#about">Về chúng tôi</a></li>
-    <li><a href="#contact" class="nav-cta">Mua ngay</a></li>
-  </ul>
+  <div style="display:flex;align-items:center;gap:16px">
+    <ul class="nav-links">
+      <li><a href="#products">Sản phẩm</a></li>
+      <li><a href="#ingredients">Thành phần</a></li>
+      <li><a href="#about">Về chúng tôi</a></li>
+      <li><a href="#contact" class="nav-cta">Mua ngay</a></li>
+    </ul>
+    <button class="nav-cart-btn" id="cartBtn" onclick="openCart()" title="Giỏ hàng">
+      🛒
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
 </nav>
  
 <!-- HERO -->
@@ -1115,9 +1400,433 @@
   <span class="cart-notif-icon">🛒</span>
   <span id="cartMsg">Đã thêm vào giỏ hàng!</span>
 </div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="product-modal" id="productModal">
+  <div class="modal-box">
+    <div class="modal-img" id="modalImg">
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+      <img id="modalImgSrc" src="" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-benefits" id="modalBenefits"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-qty">
+        <span style="font-size:12px;letter-spacing:1px;color:var(--text-mid);text-transform:uppercase">Số lượng</span>
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="modalQty">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <button class="modal-add-btn" onclick="addFromModal()">🛒 Thêm vào giỏ hàng</button>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Giỏ hàng</h3>
+    <button class="cart-close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">🛒</div>
+      <div>Giỏ hàng của bạn đang trống</div>
+      <div style="font-size:12px;color:#bbb">Hãy thêm sản phẩm yêu thích!</div>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Tổng cộng</span>
+      <span class="cart-total-price" id="cartTotal">0đ</span>
+    </div>
+    <button class="cart-checkout-btn" onclick="openCheckout()">Tiến hành thanh toán →</button>
+    <button class="cart-continue-btn" onclick="closeCart()">← Tiếp tục mua sắm</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+    <button class="checkout-close-btn" onclick="closeCheckout()">✕</button>
+    <div id="checkoutForm">
+      <div class="section-label">Đặt hàng</div>
+      <h2>Thông Tin Thanh Toán</h2>
+      <div class="checkout-summary" id="checkoutSummary"></div>
+      <form class="checkout-form" onsubmit="submitOrder(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Họ và tên *</label>
+            <input type="text" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại *</label>
+            <input type="tel" placeholder="0912 345 678" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ giao hàng *</label>
+          <input type="text" placeholder="Số nhà, tên đường" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tỉnh / Thành phố</label>
+            <select>
+              <option>Hà Nội</option>
+              <option>TP. Hồ Chí Minh</option>
+              <option>Đà Nẵng</option>
+              <option>Tỉnh / Thành phố khác</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quận / Huyện</label>
+            <input type="text" placeholder="Quận / Huyện">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ghi chú</label>
+          <textarea placeholder="Ghi chú thêm cho đơn hàng..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Phương thức thanh toán</label>
+          <div class="payment-methods">
+            <label class="payment-opt selected">
+              <input type="radio" name="payment" value="cod" checked>
+              <div>
+                <div class="payment-opt-label">💵 Thanh toán khi nhận hàng (COD)</div>
+                <div class="payment-opt-sub">Trả tiền mặt khi nhận hàng</div>
+              </div>
+            </label>
+            <label class="payment-opt">
+              <input type="radio" name="payment" value="bank">
+              <div>
+                <div class="payment-opt-label">🏦 Chuyển khoản ngân hàng</div>
+                <div class="payment-opt-sub">Vietcombank · MB Bank · Techcombank</div>
+              </div>
+            </label>
+            <label class="payment-opt">
+              <input type="radio" name="payment" value="momo">
+              <div>
+                <div class="payment-opt-label">📱 Ví MoMo / ZaloPay</div>
+                <div class="payment-opt-sub">Thanh toán qua ví điện tử</div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="checkout-submit-btn">✓ Xác nhận đặt hàng</button>
+      </form>
+    </div>
+    <div class="checkout-success" id="checkoutSuccess">
+      <div class="checkout-success-icon">🎉</div>
+      <h3>Đặt hàng thành công!</h3>
+      <p>Cảm ơn bạn đã tin tưởng Mộc Trầu.<br>Chúng tôi sẽ liên hệ xác nhận đơn hàng trong vòng 30 phút.</p>
+      <button class="modal-add-btn" style="max-width:240px" onclick="closeAll();clearCart()">Tiếp tục mua sắm</button>
+    </div>
+  </div>
+</div>
  
 <script>
-  // Scroll reveal
+  // ── PRODUCT DATA ──
+  const products = [
+    {
+      id: 1,
+      name: 'Botanical Micellar Cleansing Water',
+      tag: 'Bán chạy',
+      price: 285000,
+      priceText: '285.000đ',
+      volume: '150ml',
+      img: 'ảnh%20sản%20phẩm/z7796173775557_c56f30f6afef167b21aec95a61f9487a.jpg',
+      bg: 'linear-gradient(135deg,#e8f5e9,#c8e6c9)',
+      desc: 'Nước tẩy trang thực vật chiết xuất từ lá trầu không. Làm sạch nhẹ nhàng, cân bằng da, không gây kích ứng. Phù hợp cho mọi loại da kể cả da nhạy cảm.',
+      details: [
+        { label: 'Dung tích', value: '150ml' },
+        { label: 'Da phù hợp', value: 'Mọi loại da, đặc biệt da nhạy cảm' },
+        { label: 'Thành phần', value: 'Chiết xuất lá trầu không, Aloe Vera, Niacinamide' },
+        { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' },
+      ],
+      benefits: ['Purify', 'Balance', 'Gentle', '100% Thiên Nhiên'],
+    },
+    {
+      id: 2,
+      name: 'Soothing Cleanser',
+      tag: 'Sữa rửa mặt',
+      price: 265000,
+      priceText: '265.000đ',
+      volume: '250ml',
+      img: 'ảnh%20sản%20phẩm/z7796173777382_71af9a1f8c619ccf67a292e655e6d8e2.jpg',
+      bg: 'linear-gradient(135deg,#f1f8e9,#dcedc8)',
+      desc: 'Sữa rửa mặt dịu nhẹ chiết xuất trầu không thuần khiết. Làm sạch sâu, dịu da, thu nhỏ lỗ chân lông và cấp ẩm tức thì.',
+      details: [
+        { label: 'Dung tích', value: '250ml' },
+        { label: 'Da phù hợp', value: 'Da hỗn hợp, da dầu, da thường' },
+        { label: 'Thành phần', value: 'Chiết xuất trầu không, Hyaluronic Acid, Vitamin B5' },
+        { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' },
+      ],
+      benefits: ['Calm', 'Hydrate', 'Minimize Pores'],
+    },
+    {
+      id: 3,
+      name: 'Detox Mask',
+      tag: 'Mới ra mắt',
+      price: 320000,
+      priceText: '320.000đ',
+      volume: '80ml',
+      img: 'ảnh%20sản%20phẩm/z7796173775558_a59171635cf63e5bfc49a0f47281b102.jpg',
+      bg: 'linear-gradient(135deg,#f9f6f0,#ede8de)',
+      desc: 'Mặt nạ thải độc cao cấp với chiết xuất thảo dược lá trầu. Giải phóng lỗ chân lông, làm sạch sâu, sáng da sau mỗi lần sử dụng.',
+      details: [
+        { label: 'Dung tích', value: '80ml' },
+        { label: 'Tần suất', value: 'Dùng 2-3 lần/tuần' },
+        { label: 'Thành phần', value: 'Lá trầu không, Kaolin Clay, Charcoal, Vitamin C' },
+        { label: 'Hạn sử dụng', value: '18 tháng kể từ ngày sản xuất' },
+      ],
+      benefits: ['Purify', 'Soothe', 'Brighten'],
+    },
+    {
+      id: 4,
+      name: 'Sữa Tắm Lá Trầu',
+      tag: 'Betel Body Wash',
+      price: 245000,
+      priceText: '245.000đ',
+      volume: '400ml',
+      img: 'ảnh%20sản%20phẩm/z7796173794385_183c45728de6f780f41eb675931ecc16.jpg',
+      bg: 'linear-gradient(135deg,#f0f4ec,#dde8d5)',
+      desc: 'Sữa tắm hoàn toàn tự nhiên, không hóa chất. Hương thơm dịu nhẹ từ thiên nhiên, kháng khuẩn tự nhiên, dưỡng ẩm toàn thân.',
+      details: [
+        { label: 'Dung tích', value: '400ml' },
+        { label: 'Da phù hợp', value: 'Mọi loại da' },
+        { label: 'Thành phần', value: 'Chiết xuất lá trầu, Coconut Extract, Aloe Vera' },
+        { label: 'Hạn sử dụng', value: '24 tháng kể từ ngày sản xuất' },
+      ],
+      benefits: ['100% Tự Nhiên', 'Kháng Khuẩn'],
+    },
+    {
+      id: 5,
+      name: 'Spot Treatment',
+      tag: 'Hot',
+      price: 195000,
+      priceText: '195.000đ',
+      volume: '30ml',
+      img: 'ảnh%20sản%20phẩm/z7796173785993_b75c945324a5e94b77345b374b302175.jpg',
+      bg: 'linear-gradient(135deg,#f3f8f0,#e2eedb)',
+      desc: 'Trị mụn điểm hiệu quả với chiết xuất lá trầu nồng độ cao. Xóa mụn nhanh, giảm viêm đỏ, cân bằng dầu. Thấm nhanh, không để lại vết.',
+      details: [
+        { label: 'Dung tích', value: '30ml' },
+        { label: 'Da phù hợp', value: 'Da dầu, da mụn' },
+        { label: 'Thành phần', value: 'Lá trầu nồng độ cao, Salicylic Acid 0.5%, Tea Tree Oil' },
+        { label: 'Hạn sử dụng', value: '18 tháng kể từ ngày sản xuất' },
+      ],
+      benefits: ['Clear Blemishes', 'Calm Redness', 'Balance Oil'],
+    },
+  ];
+
+  // ── MODAL STATE ──
+  let currentProduct = null;
+  let modalQty = 1;
+
+  // ── CART STATE ──
+  let cart = [];
+
+  // ── MAKE PRODUCT CARDS CLICKABLE ──
+  document.querySelectorAll('.product-card').forEach((card, i) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.add-btn')) return;
+      openProductModal(products[i]);
+    });
+  });
+
+  // ── PRODUCT MODAL ──
+  function openProductModal(product) {
+    currentProduct = product;
+    modalQty = 1;
+    document.getElementById('modalImgSrc').src = product.img;
+    document.getElementById('modalImgSrc').alt = product.name;
+    document.getElementById('modalImg').style.background = product.bg;
+    document.getElementById('modalTag').textContent = product.tag;
+    document.getElementById('modalName').textContent = product.name;
+    document.getElementById('modalPrice').innerHTML = `${product.priceText} <span>/ ${product.volume}</span>`;
+    document.getElementById('modalDesc').textContent = product.desc;
+    document.getElementById('modalQty').textContent = '1';
+    // Details
+    document.getElementById('modalDetails').innerHTML = product.details.map(d =>
+      `<div class="modal-detail-row"><strong>${d.label}:</strong><span>${d.value}</span></div>`
+    ).join('');
+    // Benefits
+    document.getElementById('modalBenefits').innerHTML = product.benefits.map(b =>
+      `<span class="benefit-tag">${b}</span>`
+    ).join('');
+    document.getElementById('productModal').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProductModal() {
+    document.getElementById('productModal').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeQty(delta) {
+    modalQty = Math.max(1, modalQty + delta);
+    document.getElementById('modalQty').textContent = modalQty;
+  }
+
+  function addFromModal() {
+    if (!currentProduct) return;
+    addToCart(currentProduct.name, currentProduct, modalQty);
+    closeProductModal();
+    setTimeout(() => openCart(), 300);
+  }
+
+  // ── CART ──
+  function addToCart(name, product, qty = 1) {
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ ...product, qty });
+    }
+    updateCartUI();
+    // notification
+    const notif = document.getElementById('cartNotif');
+    document.getElementById('cartMsg').textContent = `Đã thêm "${name}" vào giỏ!`;
+    notif.classList.add('show');
+    setTimeout(() => notif.classList.remove('show'), 3000);
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    updateCartUI();
+  }
+
+  function changeCartQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty = Math.max(1, item.qty + delta);
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const totalCount = cart.reduce((s, i) => s + i.qty, 0);
+    // badge
+    const badge = document.getElementById('cartBadge');
+    badge.textContent = totalCount;
+    badge.classList.toggle('visible', totalCount > 0);
+    // items list
+    const container = document.getElementById('cartItems');
+    const empty = document.getElementById('cartEmpty');
+    const footer = document.getElementById('cartFooter');
+    if (cart.length === 0) {
+      container.innerHTML = '';
+      container.appendChild(empty);
+      empty.style.display = 'flex';
+      footer.style.display = 'none';
+    } else {
+      empty.style.display = 'none';
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-img">
+            <img src="${item.img}" alt="${item.name}">
+          </div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${item.priceText} / ${item.volume}</div>
+            <div class="cart-item-qty">
+              <button onclick="changeCartQty(${item.id},-1)">−</button>
+              <span>${item.qty}</span>
+              <button onclick="changeCartQty(${item.id},1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Xóa">✕</button>
+        </div>
+      `).join('');
+      footer.style.display = 'flex';
+      footer.style.flexDirection = 'column';
+    }
+    document.getElementById('cartTotal').textContent =
+      total.toLocaleString('vi-VN') + 'đ';
+  }
+
+  function openCart() {
+    document.getElementById('cartSidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    document.getElementById('cartSidebar').classList.remove('open');
+    if (!document.getElementById('productModal').classList.contains('active') &&
+        !document.getElementById('checkoutModal').classList.contains('active')) {
+      document.getElementById('overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function clearCart() {
+    cart = [];
+    updateCartUI();
+  }
+
+  // ── CHECKOUT ──
+  function openCheckout() {
+    closeCart();
+    // Build summary
+    const summary = document.getElementById('checkoutSummary');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    summary.innerHTML = cart.map(item =>
+      `<div class="checkout-summary-item">
+        <span>${item.name} × ${item.qty}</span>
+        <span>${(item.price * item.qty).toLocaleString('vi-VN')}đ</span>
+      </div>`
+    ).join('') +
+    `<div class="checkout-summary-item total">
+      <span>Tổng cộng</span>
+      <span>${total.toLocaleString('vi-VN')}đ</span>
+    </div>`;
+    document.getElementById('checkoutSuccess').style.display = 'none';
+    document.getElementById('checkoutSuccess').classList.remove('show');
+    document.getElementById('checkoutForm').style.display = 'block';
+    document.getElementById('checkoutModal').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkoutModal').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function submitOrder(e) {
+    e.preventDefault();
+    document.getElementById('checkoutForm').style.display = 'none';
+    const success = document.getElementById('checkoutSuccess');
+    success.style.display = 'flex';
+    success.classList.add('show');
+  }
+
+  function closeAll() {
+    closeProductModal();
+    closeCart();
+    closeCheckout();
+  }
+
+  // ── SCROLL REVEAL ──
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -1127,16 +1836,8 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
- 
-  // Cart
-  function addToCart(name) {
-    const notif = document.getElementById('cartNotif');
-    document.getElementById('cartMsg').textContent = `Đã thêm "${name}" vào giỏ!`;
-    notif.classList.add('show');
-    setTimeout(() => notif.classList.remove('show'), 3000);
-  }
- 
-  // CTA form
+
+  // ── CTA FORM ──
   document.querySelector('.cta-form button').addEventListener('click', () => {
     const input = document.querySelector('.cta-form input');
     if (input.value) {
@@ -1145,11 +1846,19 @@
       setTimeout(() => input.placeholder = 'Nhập email của bạn...', 3000);
     }
   });
- 
-  // Nav scroll effect
+
+  // ── NAV SCROLL ──
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
     nav.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(26,58,42,0.08)' : 'none';
+  });
+
+  // ── PAYMENT OPTION HIGHLIGHT ──
+  document.querySelectorAll('.payment-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.payment-opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
   });
 </script>
 </body>
