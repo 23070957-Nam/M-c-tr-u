@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mộc Trầu – Nature Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-soft: #4a7c5f;
+    --green-light: #a8c5a0;
+    --cream: #f5f0e8;
+    --cream-dark: #ede5d5;
+    --gold: #b8963e;
+    --gold-light: #d4af6a;
+    --white: #fefcf8;
+    --text-dark: #1a2a1e;
+    --text-mid: #3d5a45;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+ 
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 18px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(254,252,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,150,62,0.15);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-emblem {
+    width: 48px; height: 48px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .logo-emblem svg { width: 32px; height: 32px; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--green-deep);
+    letter-spacing: 2px;
+  }
+  .logo-sub {
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+    font-weight: 400;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dark); text-decoration: none; font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--green-deep); color: var(--cream) !important;
+    padding: 10px 24px; border-radius: 2px;
+    letter-spacing: 2px; font-size: 11px !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; }
+ 
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(165deg, var(--green-deep) 0%, #1e4530 40%, #2d5a3d 70%, #3a6b4a 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: radial-gradient(circle at 20% 50%, var(--gold) 1px, transparent 1px),
+                      radial-gradient(circle at 80% 20%, var(--gold) 1px, transparent 1px),
+                      radial-gradient(circle at 60% 80%, var(--gold) 1px, transparent 1px);
+    background-size: 80px 80px, 120px 120px, 60px 60px;
+  }
+  .hero-leaf-bg {
+    position: absolute; right: -60px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.08; pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 560px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(184,150,62,0.5);
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge span {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-light); font-weight: 400;
+  }
+  .hero-badge-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 300; line-height: 1.0;
+    color: var(--white);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold-light); display: block;
+  }
+  .hero-desc {
+    font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.7);
+    margin: 28px 0 40px; max-width: 440px; font-weight: 300;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-btns { display: flex; gap: 16px; animation: fadeUp 0.8s 0.3s ease both; }
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--gold);
+    color: var(--white); text-decoration: none;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 500; border-radius: 2px;
+    transition: all 0.3s;
+    border: 1px solid var(--gold);
+  }
+  .btn-primary:hover { background: transparent; color: var(--gold); }
+  .btn-outline {
+    padding: 14px 36px;
+    border: 1px solid rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 400; border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300; color: var(--gold-light);
+  }
+  .stat-label { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+  .hero-visual {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 50%; pointer-events: none; overflow: hidden;
+  }
+  .hero-circle {
+    position: absolute; right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,62,0.12) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .hero-circle-2 {
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,150,62,0.2);
+    animation: spin 30s linear infinite;
+  }
+  .hero-circle-3 {
+    position: absolute; right: 100px; top: 50%;
+    transform: translateY(-50%);
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(168,197,160,0.25);
+    animation: spin 20s linear infinite reverse;
+  }
+  .floating-leaf {
+    position: absolute;
+    opacity: 0.4;
+    animation: float 6s ease-in-out infinite;
+  }
+  .floating-leaf:nth-child(1) { right: 200px; top: 20%; animation-delay: 0s; }
+  .floating-leaf:nth-child(2) { right: 100px; top: 50%; animation-delay: 1.5s; }
+  .floating-leaf:nth-child(3) { right: 280px; top: 70%; animation-delay: 3s; }
+ 
+  /* ── ABOUT STRIP ── */
+  .strip {
+    background: var(--gold);
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .strip-inner {
+    display: inline-flex; gap: 60px;
+    animation: marquee 20s linear infinite;
+  }
+  .strip-item {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white); font-weight: 400;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .strip-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 50%; }
+ 
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    padding: 100px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .philosophy-text {}
+  .section-label {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before {
+    content: ''; width: 32px; height: 1px; background: var(--gold);
+  }
+  .philosophy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4vw, 56px);
+    font-weight: 300; line-height: 1.15;
+    color: var(--green-deep); margin-bottom: 24px;
+  }
+  .philosophy h2 em { font-style: italic; color: var(--green-soft); }
+  .philosophy p {
+    font-size: 15px; line-height: 1.9; color: var(--text-mid);
+    font-weight: 300; margin-bottom: 16px;
+  }
+  .philosophy-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;
+  }
+  .feat {
+    padding: 20px;
+    border: 1px solid var(--cream-dark);
+    border-radius: 4px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+  .feat:hover { border-color: var(--gold-light); transform: translateY(-2px); }
+  .feat-icon { font-size: 24px; margin-bottom: 10px; }
+  .feat-title { font-size: 13px; font-weight: 500; color: var(--green-deep); margin-bottom: 4px; }
+  .feat-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .philosophy-visual {
+    position: relative; height: 500px;
+  }
+  .philo-card {
+    position: absolute;
+    background: var(--green-deep);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .philo-card-1 { width: 280px; height: 360px; top: 0; left: 0; }
+  .philo-card-2 { width: 200px; height: 260px; bottom: 0; right: 0; }
+  .philo-card svg { width: 100%; height: 100%; opacity: 0.3; }
+  .philo-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 24px;
+    background: linear-gradient(to top, rgba(26,58,42,0.9) 0%, transparent 50%);
+  }
+  .philo-tag {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 6px;
+  }
+  .philo-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: white; }
+  .philo-badge {
+    position: absolute; top: -20px; right: 40px;
+    width: 100px; height: 100px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 3;
+    box-shadow: 0 8px 30px rgba(184,150,62,0.4);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  .philo-badge span { font-size: 9px; letter-spacing: 1px; text-align: center; color: white; line-height: 1.4; }
+  .philo-badge strong { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: white; }
+ 
+  /* ── PRODUCTS ── */
+  .products { padding: 100px 60px; background: var(--cream); }
+  .products-header { text-align: center; margin-bottom: 60px; }
+  .products-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 300; color: var(--green-deep);
+    margin-bottom: 16px;
+  }
+  .products-header p {
+    font-size: 14px; color: var(--text-mid); letter-spacing: 1px; font-weight: 300;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(26,58,42,0.12); }
+  .product-card:nth-child(2) { grid-column: span 1; }
+  .product-img {
+    height: 280px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .product-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .product-card:hover .product-img img { transform: scale(1.05); }
+  .product-tag {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--gold); color: white;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 2px;
+  }
+  .product-info { padding: 24px; }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400;
+    color: var(--green-deep); margin-bottom: 8px;
+  }
+  .product-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 16px; }
+  .product-benefits {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .benefit-tag {
+    font-size: 10px; letter-spacing: 1px; padding: 3px 10px;
+    border: 1px solid var(--green-light);
+    color: var(--green-mid); border-radius: 20px;
+  }
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--cream-dark);
+  }
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; color: var(--gold);
+  }
+  .product-price span { font-size: 12px; color: var(--text-mid); font-family: 'Jost', sans-serif; }
+  .add-btn {
+    width: 36px; height: 36px;
+    background: var(--green-deep); color: white;
+    border: none; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: all 0.3s;
+  }
+  .add-btn:hover { background: var(--gold); transform: rotate(90deg); }
+ 
+  /* featured product wide */
+  .product-card.featured { grid-column: span 2; }
+  .product-card.featured .product-img { height: 340px; }
+ 
+  /* ── INGREDIENTS ── */
+  .ingredients {
+    padding: 100px 60px;
+    background: var(--green-deep);
+    position: relative; overflow: hidden;
+  }
+  .ingredients::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(184,150,62,0.08) 0%, transparent 60%);
+  }
+  .ing-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 2; }
+  .ing-header .section-label { justify-content: center; color: var(--gold-light); }
+  .ing-header .section-label::before { background: var(--gold-light); }
+  .ing-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 300; color: var(--white); margin-bottom: 16px;
+  }
+  .ing-header p { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; }
+  .ing-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .ing-item {
+    padding: 40px 30px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+    text-align: center;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .ing-item:hover { background: rgba(184,150,62,0.1); border-color: rgba(184,150,62,0.3); }
+  .ing-icon { font-size: 36px; margin-bottom: 16px; }
+  .ing-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--white); margin-bottom: 8px;
+  }
+  .ing-benefit { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+ 
+  /* ── PROCESS ── */
+  .process { padding: 100px 60px; }
+  .process-header { text-align: center; margin-bottom: 60px; }
+  .process-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300; color: var(--green-deep); margin-bottom: 12px;
+  }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; max-width: 1000px; margin: 0 auto;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute; top: 36px; left: 10%; right: 10%;
+    height: 1px; background: linear-gradient(to right, var(--gold-light), var(--green-light), var(--gold-light));
+    z-index: 0;
+  }
+  .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .step-num {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--gold);
+    box-shadow: 0 8px 24px rgba(184,150,62,0.15);
+  }
+  .step-title { font-size: 13px; font-weight: 500; color: var(--green-deep); margin-bottom: 8px; letter-spacing: 1px; }
+  .step-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+ 
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding: 100px 60px; background: var(--cream); }
+  .testi-header { text-align: center; margin-bottom: 60px; }
+  .testi-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300; color: var(--green-deep);
+  }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .testi-card {
+    background: var(--white); padding: 36px;
+    border-radius: 6px;
+    border: 1px solid var(--cream-dark);
+    transition: all 0.3s;
+  }
+  .testi-card:hover { border-color: var(--gold-light); transform: translateY(-4px); }
+  .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 3px; }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: var(--text-dark); line-height: 1.7; margin-bottom: 24px;
+  }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--green-deep);
+  }
+  .testi-name { font-size: 13px; font-weight: 500; color: var(--green-deep); }
+  .testi-loc { font-size: 11px; color: var(--text-mid); }
+ 
+  /* ── CTA ── */
+  .cta-section {
+    padding: 100px 60px;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,150,62,0.12);
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,150,62,0.18);
+  }
+  .cta-inner { position: relative; z-index: 2; }
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300; color: var(--green-deep);
+    margin-bottom: 16px;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--gold); }
+  .cta-section p { font-size: 15px; color: var(--text-mid); margin-bottom: 40px; font-weight: 300; }
+  .cta-form {
+    display: flex; gap: 0; max-width: 460px; margin: 0 auto;
+    border: 1px solid var(--cream-dark); border-radius: 4px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(26,58,42,0.08);
+  }
+  .cta-form input {
+    flex: 1; padding: 16px 20px;
+    border: none; outline: none;
+    font-family: 'Jost', sans-serif; font-size: 13px;
+    background: var(--white); color: var(--text-dark);
+  }
+  .cta-form input::placeholder { color: #aaa; }
+  .cta-form button {
+    padding: 16px 28px;
+    background: var(--green-deep); color: white;
+    border: none; cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    transition: background 0.3s;
+  }
+  .cta-form button:hover { background: var(--gold); }
+ 
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep); padding: 60px 60px 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 50px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .footer-logo-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--white); letter-spacing: 2px;
+  }
+  .footer-brand-sub { font-size: 9px; letter-spacing: 3px; color: var(--gold-light); }
+  .footer-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 24px; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); font-size: 14px; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col h4 {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 20px; font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.3s;
+    font-weight: 300;
+  }
+  .footer-col ul a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+ 
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.05); }
+  }
+  @keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulseBadge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+ 
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+ 
+  /* Cart notification */
+  .cart-notif {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    background: var(--green-deep); color: white;
+    padding: 14px 24px; border-radius: 4px;
+    font-size: 13px; display: flex; align-items: center; gap: 10px;
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.4s;
+    box-shadow: 0 12px 40px rgba(26,58,42,0.3);
+  }
+  .cart-notif.show { transform: translateY(0); opacity: 1; }
+  .cart-notif-icon { font-size: 18px; }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4 C8 8 6 14 8 20 C10 26 14 28 16 28 C18 28 22 26 24 20 C26 14 24 8 16 4Z" fill="#2d5a3d" opacity="0.8"/>
+        <path d="M16 4 C16 4 12 10 12 16 C12 22 14 27 16 28" stroke="#b8963e" stroke-width="1.5" fill="none"/>
+        <path d="M16 4 C16 4 20 10 20 16 C20 22 18 27 16 28" stroke="#b8963e" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+        <circle cx="16" cy="16" r="3" fill="#b8963e" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">MỘC TRẦU</span>
+      <span class="logo-sub">Nature · Skincare</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#ingredients">Thành phần</a></li>
+    <li><a href="#about">Về chúng tôi</a></li>
+    <li><a href="#contact" class="nav-cta">Mua ngay</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>100% Thiên Nhiên · Chiết Xuất Lá Trầu Không</span>
+    </div>
+    <h1>Vẻ Đẹp<br>Từ <em>Thiên Nhiên</em></h1>
+    <p class="hero-desc">Mộc Trầu mang đến dòng skincare thuần tự nhiên được chiết xuất từ lá trầu không – loại thảo dược quý trong dân gian Việt Nam, kết hợp công nghệ hiện đại để chăm sóc làn da toàn diện.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Khám phá sản phẩm</a>
+      <a href="#about" class="btn-outline">Tìm hiểu thêm</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Thiên nhiên</div>
+      </div>
+      <div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Sản phẩm</div>
+      </div>
+      <div>
+        <div class="stat-num">5K+</div>
+        <div class="stat-label">Khách hàng</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-circle"></div>
+    <div class="hero-circle-2"></div>
+    <div class="hero-circle-3"></div>
+    <!-- Floating leaves -->
+    <div class="floating-leaf" style="right:220px;top:18%">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <path d="M30 5 C15 10 8 22 10 35 C12 48 22 55 30 55 C38 55 48 48 50 35 C52 22 45 10 30 5Z" fill="#4a7c5f" opacity="0.6"/>
+        <path d="M30 5 C30 5 28 20 28 30 C28 40 29 52 30 55" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="floating-leaf" style="right:90px;top:42%;animation-delay:2s">
+      <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+        <path d="M30 5 C15 10 8 22 10 35 C12 48 22 55 30 55 C38 55 48 48 50 35 C52 22 45 10 30 5Z" fill="#2d5a3d" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="floating-leaf" style="right:300px;top:68%;animation-delay:4s">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <path d="M30 5 C15 10 8 22 10 35 C12 48 22 55 30 55 C38 55 48 48 50 35 C52 22 45 10 30 5Z" fill="#4a7c5f" opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+</section>
+ 
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><div class="strip-dot"></div>100% Thiên Nhiên</div>
+    <div class="strip-item"><div class="strip-dot"></div>Chiết Xuất Lá Trầu Không</div>
+    <div class="strip-item"><div class="strip-dot"></div>Không Hóa Chất</div>
+    <div class="strip-item"><div class="strip-dot"></div>Thuần Chay</div>
+    <div class="strip-item"><div class="strip-dot"></div>Da Nhạy Cảm Phù Hợp</div>
+    <div class="strip-item"><div class="strip-dot"></div>Sản Xuất Tại Việt Nam</div>
+    <!-- repeat for seamless -->
+    <div class="strip-item"><div class="strip-dot"></div>100% Thiên Nhiên</div>
+    <div class="strip-item"><div class="strip-dot"></div>Chiết Xuất Lá Trầu Không</div>
+    <div class="strip-item"><div class="strip-dot"></div>Không Hóa Chất</div>
+    <div class="strip-item"><div class="strip-dot"></div>Thuần Chay</div>
+    <div class="strip-item"><div class="strip-dot"></div>Da Nhạy Cảm Phù Hợp</div>
+    <div class="strip-item"><div class="strip-dot"></div>Sản Xuất Tại Việt Nam</div>
+  </div>
+</div>
+ 
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="about">
+  <div class="philosophy-text reveal">
+    <div class="section-label">Triết lý thương hiệu</div>
+    <h2>Thuần Khiết Từ <em>Đất Mẹ</em></h2>
+    <p>Lá trầu không – loại thảo dược quen thuộc trong văn hóa Việt Nam – chứa đựng hàm lượng cao các hoạt chất kháng khuẩn, chống viêm và chống oxy hóa tự nhiên. Mộc Trầu khai thác sức mạnh tiềm ẩn của thiên nhiên, mang đến cho bạn làn da khỏe đẹp từ gốc rễ.</p>
+    <p>Chúng tôi tin rằng vẻ đẹp thực sự đến từ sự hài hòa giữa con người và thiên nhiên – không cần hóa chất, không cần can thiệp nhân tạo, chỉ cần sự tinh khiết nguyên bản.</p>
+    <div class="philosophy-features">
+      <div class="feat">
+        <div class="feat-icon">🌿</div>
+        <div class="feat-title">Thuần Tự Nhiên</div>
+        <div class="feat-desc">100% thành phần chiết xuất từ thực vật, không paraben, không sulphate</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔬</div>
+        <div class="feat-title">Khoa Học Hiện Đại</div>
+        <div class="feat-desc">Công nghệ chiết xuất lạnh giữ nguyên dưỡng chất quý giá của lá trầu</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌱</div>
+        <div class="feat-title">Thân Thiện Môi Trường</div>
+        <div class="feat-desc">Bao bì tái chế, quy trình sản xuất xanh, bền vững với thiên nhiên</div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💚</div>
+        <div class="feat-title">Dành Cho Mọi Loại Da</div>
+        <div class="feat-desc">Phù hợp kể cả da nhạy cảm, đã được kiểm nghiệm da liễu</div>
+      </div>
+    </div>
+  </div>
+  <div class="philosophy-visual reveal">
+    <div class="philo-card philo-card-1">
+      <div style="background: linear-gradient(135deg, #1a3a2a 0%, #2d5a3d 100%); width:100%;height:100%; display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 200 300" fill="none" style="width:160px;opacity:0.5">
+          <path d="M100 20 C55 40 30 80 35 130 C40 180 70 220 100 240 C130 220 160 180 165 130 C170 80 145 40 100 20Z" fill="#4a7c5f"/>
+          <path d="M100 20 C100 20 90 70 88 110 C86 150 90 210 100 240" stroke="#b8963e" stroke-width="2" fill="none"/>
+          <path d="M88 110 C70 100 55 95 45 100" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+          <path d="M90 140 C72 135 58 132 48 135" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+          <path d="M92 170 C76 168 63 167 55 170" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+          <path d="M88 110 C106 100 120 95 130 100" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+          <path d="M90 140 C108 135 122 132 132 135" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="philo-inner">
+        <div class="philo-tag">Nguyên liệu chính</div>
+        <div class="philo-title">Lá Trầu Không</div>
+      </div>
+    </div>
+    <div class="philo-badge" style="animation: pulseBadge 3s ease-in-out infinite;">
+      <strong>100%</strong>
+      <span>Thiên<br>Nhiên</span>
+    </div>
+    <div class="philo-card philo-card-2">
+      <div style="background: linear-gradient(135deg, #b8963e 0%, #8a6e2a 100%); width:100%;height:100%; display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 140 180" fill="none" style="width:100px;opacity:0.5">
+          <circle cx="70" cy="90" r="60" stroke="#fff" stroke-width="1.5" fill="none"/>
+          <circle cx="70" cy="90" r="40" stroke="#fff" stroke-width="1" fill="rgba(255,255,255,0.1)" stroke-dasharray="4 4"/>
+          <path d="M70 30 L90 70 L130 70 L100 95 L110 135 L70 110 L30 135 L40 95 L10 70 L50 70 Z" fill="rgba(255,255,255,0.15)" stroke="#fff" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="philo-inner">
+        <div class="philo-tag">Chất lượng</div>
+        <div class="philo-title">Cao Cấp</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header reveal">
+    <div class="section-label" style="justify-content:center">
+      <span>Bộ sưu tập</span>
+    </div>
+    <h2>Sản Phẩm Mộc Trầu</h2>
+    <p>Mỗi sản phẩm là sự kết tinh của thiên nhiên và khoa học hiện đại</p>
+  </div>
+  <div class="products-grid">
+ 
+    <!-- Product 1 - Featured: Botanical Micellar Cleansing Water -->
+    <div class="product-card featured reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+        <img src="ảnh%20sản%20phẩm/z7796173775557_c56f30f6afef167b21aec95a61f9487a.jpg" alt="Botanical Micellar Cleansing Water" style="object-position: center top;">
+        <div class="product-tag">Bán chạy</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Botanical Micellar Cleansing Water</div>
+        <div class="product-desc">Nước tẩy trang thực vật chiết xuất từ lá trầu không. Làm sạch nhẹ nhàng, cân bằng da, không gây kích ứng.</div>
+        <div class="product-benefits">
+          <span class="benefit-tag">Purify</span>
+          <span class="benefit-tag">Balance</span>
+          <span class="benefit-tag">Gentle</span>
+          <span class="benefit-tag">100% Thiên Nhiên</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">285.000đ <span>/ 150ml</span></div>
+          <button class="add-btn" onclick="addToCart('Botanical Micellar Cleansing Water')">+</button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Product 2: Soothing Cleanser -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);">
+        <img src="ảnh%20sản%20phẩm/z7796173777382_71af9a1f8c619ccf67a292e655e6d8e2.jpg" alt="Soothing Cleanser">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Soothing Cleanser</div>
+        <div class="product-desc">Sữa rửa mặt dịu nhẹ – Calm · Hydrate · Minimize Pores. Chiết xuất trầu không thuần khiết.</div>
+        <div class="product-benefits">
+          <span class="benefit-tag">Calm</span>
+          <span class="benefit-tag">Hydrate</span>
+          <span class="benefit-tag">Minimize Pores</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">265.000đ <span>/ 250ml</span></div>
+          <button class="add-btn" onclick="addToCart('Soothing Cleanser')">+</button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Product 3: Detox Mask -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #f9f6f0 0%, #ede8de 100%);">
+        <img src="ảnh%20sản%20phẩm/z7796173775558_a59171635cf63e5bfc49a0f47281b102.jpg" alt="Detox Mask">
+        <div class="product-tag" style="background:var(--green-mid)">Mới</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Detox Mask</div>
+        <div class="product-desc">Mặt nạ thải độc với chiết xuất thảo dược lá trầu. Purify – Soothe – Brighten Skin.</div>
+        <div class="product-benefits">
+          <span class="benefit-tag">Purify</span>
+          <span class="benefit-tag">Soothe</span>
+          <span class="benefit-tag">Brighten</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">320.000đ <span>/ 80ml</span></div>
+          <button class="add-btn" onclick="addToCart('Detox Mask')">+</button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Product 4: Body Wash -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #f0f4ec 0%, #dde8d5 100%);">
+        <img src="ảnh%20sản%20phẩm/z7796173794385_183c45728de6f780f41eb675931ecc16.jpg" alt="Sữa tắm lá trầu">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Sữa Tắm Lá Trầu</div>
+        <div class="product-desc">Betel Leaf Body Wash – hoàn toàn tự nhiên, không hóa chất. Hương thơm dịu nhẹ từ thiên nhiên.</div>
+        <div class="product-benefits">
+          <span class="benefit-tag">100% Tự Nhiên</span>
+          <span class="benefit-tag">Kháng Khuẩn</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">245.000đ <span>/ 400ml</span></div>
+          <button class="add-btn" onclick="addToCart('Sữa Tắm Lá Trầu')">+</button>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Product 5: Spot Treatment -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #f3f8f0 0%, #e2eedb 100%);">
+        <img src="ảnh%20sản%20phẩm/z7796173785993_b75c945324a5e94b77345b374b302175.jpg" alt="Spot Treatment">
+        <div class="product-tag" style="background:var(--gold)">Hot</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Spot Treatment</div>
+        <div class="product-desc">Trị mụn điểm với chiết xuất lá trầu. Clear Blemishes · Calm Redness · Balance Oil.</div>
+        <div class="product-benefits">
+          <span class="benefit-tag">Clear Blemishes</span>
+          <span class="benefit-tag">Calm Redness</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">195.000đ <span>/ 30ml</span></div>
+          <button class="add-btn" onclick="addToCart('Spot Treatment')">+</button>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- INGREDIENTS -->
+<section class="ingredients" id="ingredients">
+  <div class="ing-header reveal">
+    <div class="section-label">Thành phần</div>
+    <h2>Sức Mạnh Từ Thiên Nhiên</h2>
+    <p>Các hoạt chất quý giá được chiết xuất và bảo toàn nguyên vẹn</p>
+  </div>
+  <div class="ing-grid reveal">
+    <div class="ing-item">
+      <div class="ing-icon">🌿</div>
+      <div class="ing-name">Lá Trầu Không</div>
+      <div class="ing-benefit">Kháng khuẩn, chống viêm, giảm mụn hiệu quả từ chiết xuất Chavicol & Eugenol tự nhiên</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">💧</div>
+      <div class="ing-name">Aloe Vera</div>
+      <div class="ing-benefit">Dưỡng ẩm sâu, làm dịu da kích ứng, thúc đẩy tái tạo tế bào da</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">🌸</div>
+      <div class="ing-name">Niacinamide</div>
+      <div class="ing-benefit">Làm đều màu da, thu nhỏ lỗ chân lông, tăng cường hàng rào bảo vệ da</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">✨</div>
+      <div class="ing-name">Vitamin C</div>
+      <div class="ing-benefit">Chống oxy hóa mạnh mẽ, làm sáng da, ngăn ngừa lão hóa sớm</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">🌾</div>
+      <div class="ing-name">Bèo Tấm</div>
+      <div class="ing-benefit">Giàu amino acid, peptide tự nhiên hỗ trợ phục hồi và tái tạo da</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">🫚</div>
+      <div class="ing-name">Dầu Jojoba</div>
+      <div class="ing-benefit">Cân bằng bã nhờn, dưỡng ẩm không nhờn rít, phù hợp mọi loại da</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">🍵</div>
+      <div class="ing-name">Trà Xanh</div>
+      <div class="ing-benefit">Polyphenol chống oxy hóa, bảo vệ da khỏi tác hại từ tia UV</div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-icon">🌼</div>
+      <div class="ing-name">Cúc La Mã</div>
+      <div class="ing-benefit">Làm dịu, giảm đỏ, chống viêm tự nhiên cho làn da nhạy cảm</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header reveal">
+    <div class="section-label" style="justify-content:center">Quy trình</div>
+    <h2>Từ Thiên Nhiên Đến Bạn</h2>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Thu Hoạch</div>
+      <div class="step-desc">Lá trầu được thu hái thủ công từ vườn hữu cơ, đảm bảo độ tươi và chất lượng tốt nhất</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Chiết Xuất Lạnh</div>
+      <div class="step-desc">Công nghệ chiết xuất nhiệt độ thấp giữ nguyên 100% hoạt chất quý giá của lá trầu</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Kiểm Nghiệm</div>
+      <div class="step-desc">Mỗi lô sản phẩm được kiểm nghiệm nghiêm ngặt về an toàn và hiệu quả</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Đến Tay Bạn</div>
+      <div class="step-desc">Đóng gói trong bao bì thân thiện môi trường, giao hàng trên toàn quốc</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testi-header reveal">
+    <div class="section-label" style="justify-content:center">Đánh giá</div>
+    <h2>Khách Hàng Nói Gì</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Dùng được 2 tuần thấy da mình mềm mịn hơn hẳn, mụn cũng giảm rõ rệt. Mùi hương rất dễ chịu và tự nhiên!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">L</div>
+        <div>
+          <div class="testi-name">Linh Nguyễn</div>
+          <div class="testi-loc">Hà Nội · Da dầu mụn</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Mình có làn da nhạy cảm, dùng nhiều sản phẩm khác bị kích ứng. Mộc Trầu là thứ duy nhất không gây đỏ da cho mình!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">T</div>
+        <div>
+          <div class="testi-name">Thảo Phạm</div>
+          <div class="testi-loc">TP.HCM · Da nhạy cảm</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Giá hợp lý mà chất lượng rất tốt. Detox Mask là sản phẩm mình mê nhất, da sáng và sạch sau mỗi lần đắp mặt."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div>
+          <div class="testi-name">Minh Châu</div>
+          <div class="testi-loc">Đà Nẵng · Da hỗn hợp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content:center;margin-bottom:20px">Nhận ưu đãi</div>
+    <h2>Đăng Ký Nhận<br><em>Ưu Đãi Đặc Biệt</em></h2>
+    <p>Nhận ngay voucher 15% cho đơn hàng đầu tiên và cập nhật sản phẩm mới nhất từ Mộc Trầu</p>
+    <div class="cta-form">
+      <input type="email" placeholder="Nhập email của bạn...">
+      <button>Đăng ký</button>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-circle">
+          <svg viewBox="0 0 32 32" fill="none" width="24" height="24">
+            <path d="M16 4 C8 8 6 14 8 20 C10 26 14 28 16 28 C18 28 22 26 24 20 C26 14 24 8 16 4Z" fill="#4a7c5f" opacity="0.8"/>
+            <path d="M16 4 C16 4 14 12 14 18 C14 24 15 27 16 28" stroke="#b8963e" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="2.5" fill="#b8963e" opacity="0.8"/>
+          </svg>
+        </div>
+        <div>
+          <div class="footer-brand-name">MỘC TRẦU</div>
+          <div class="footer-brand-sub">Nature · Skincare</div>
+        </div>
+      </div>
+      <p class="footer-desc">Thương hiệu mỹ phẩm thiên nhiên Việt Nam, chuyên sử dụng chiết xuất lá trầu không trong các sản phẩm chăm sóc da cao cấp.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">yt</a>
+        <a href="#" class="social-btn">tt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Sản phẩm</h4>
+      <ul>
+        <li><a href="#">Cleansing Water</a></li>
+        <li><a href="#">Soothing Cleanser</a></li>
+        <li><a href="#">Detox Mask</a></li>
+        <li><a href="#">Sữa Tắm</a></li>
+        <li><a href="#">Spot Treatment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Thông tin</h4>
+      <ul>
+        <li><a href="#">Về Mộc Trầu</a></li>
+        <li><a href="#">Thành phần</a></li>
+        <li><a href="#">Blog làm đẹp</a></li>
+        <li><a href="#">Câu hỏi thường gặp</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul>
+        <li><a href="#">📍 Hà Nội, Việt Nam</a></li>
+        <li><a href="#">📞 1900 xxxx</a></li>
+        <li><a href="#">✉ hello@moctrau.vn</a></li>
+        <li><a href="#">🕐 8:00 – 22:00 hàng ngày</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Mộc Trầu Nature Skincare. Bảo lưu mọi quyền.</p>
+    <p>Thiết kế với 💚 cho làn da Việt</p>
+  </div>
+</footer>
+ 
+<!-- Cart Notification -->
+<div class="cart-notif" id="cartNotif">
+  <span class="cart-notif-icon">🛒</span>
+  <span id="cartMsg">Đã thêm vào giỏ hàng!</span>
+</div>
+ 
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+ 
+  // Cart
+  function addToCart(name) {
+    const notif = document.getElementById('cartNotif');
+    document.getElementById('cartMsg').textContent = `Đã thêm "${name}" vào giỏ!`;
+    notif.classList.add('show');
+    setTimeout(() => notif.classList.remove('show'), 3000);
+  }
+ 
+  // CTA form
+  document.querySelector('.cta-form button').addEventListener('click', () => {
+    const input = document.querySelector('.cta-form input');
+    if (input.value) {
+      input.value = '';
+      input.placeholder = '✓ Cảm ơn! Bạn sẽ nhận email sớm nhất.';
+      setTimeout(() => input.placeholder = 'Nhập email của bạn...', 3000);
+    }
+  });
+ 
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(26,58,42,0.08)' : 'none';
+  });
+</script>
+</body>
+</html>
